@@ -19,7 +19,7 @@
 
 		obj_command_out.value += ">" + obj_command_in.value;
 
-		$.get(	"shell_core.php",
+		$.get(	"command.php",
 			{command : command_line},
 			function(data) {
 				obj_command_out.value += data.command_result;

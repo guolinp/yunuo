@@ -1,7 +1,7 @@
 function ui_send_command(cmdline, cb_fun)
 {
 	$.get(
-			"ui_core.php",
+			"command.php",
 			{
 				command:cmdline
 			},
