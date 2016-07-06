@@ -1,2 +1,2 @@
 # yunuo
-this is an ihome project based on the yunuo board
+this is a yunuo board project

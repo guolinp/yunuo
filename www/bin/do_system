@@ -1,0 +1,15 @@
+#!/bin/sh
+
+system_help() #
+{
+	echo "system commands"
+	echo "  any linux system commands"
+	echo
+}
+
+do_system() #
+{
+	$@
+}
+
+do_system "$@"

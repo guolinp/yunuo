@@ -1,0 +1,30 @@
+#!/bin/sh
+
+export WWWBASE=.
+export WWWLIGHT=$WWWBASE/light
+export WWWMUSIC=$WWWBASE/music
+export WWWVAR=$WWWBASE/var
+export WWWBIN=$WWWBASE/bin
+
+do_help() #
+{
+	$WWWBIN/do_light h
+	$WWWBIN/do_music h
+}
+
+cmd=$1
+shift
+
+if [ $cmd = "light" ]; then
+	$WWWBIN/do_light "$@"
+elif [ $cmd = "music" ]; then
+	$WWWBIN/do_music "$@"
+elif [ $cmd = "system" ]; then
+	$WWWBIN/do_system "$@"
+elif [ $cmd = "ttyjs" ]; then
+	$WWWBIN/do_ttyjs "$@"
+else
+	do_help
+fi
+
+exit 0

@@ -1,0 +1,47 @@
+#!/bin/sh
+
+ttyjs_help() #
+{
+	echo "ttyjs commands"
+	echo "--------------"
+	echo "ttyjs <enable|disable|show>"
+	echo
+}
+
+ttyjs_enable() #
+{
+	echo "not implemented"
+}
+
+ttyjs_disable() #
+{
+	echo "not implemented"
+}
+
+ttyjs_show() #
+{
+	echo "not implemented"
+}
+
+do_ttyjs() #
+{
+	local cmd=$1
+
+	case $cmd in
+		enable|e)
+			shift
+			ttyjs_enable
+			;;
+		disable|d)
+			ttyjs_disable
+			;;
+		show|s)
+			ttyjs_show
+			;;
+		help|h|*)
+			ttyjs_help
+			;;
+	esac
+}
+
+do_ttyjs "$@"

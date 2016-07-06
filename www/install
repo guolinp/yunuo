@@ -1,0 +1,51 @@
+#!/bin/sh
+
+board=$1
+
+common_init() #
+{
+	mkdir -p var
+	touch var/.music_current
+	chmod 666 var/.music_current
+	touch var/.request.log
+	chmod 666 var/.request.log
+}
+
+board_simulate_init() #
+{
+	common_init
+	mkdir -p light
+	touch light/{0,1,2,3,4,5,6,7}
+	chmod 666 light/*
+	mkdir -p music
+	touch music/{123.mp3,456.mp3,789.mp3,abc.mp3,def.mp3}
+}
+
+board_yunuo_init() #
+{
+	common_init
+	cp -Rf board/$board/php/* .
+	cp -Rf board/$board/bin/* bin/
+}
+
+board_remote_init() #
+{
+	common_init
+	cp -Rf board/$board/php/* .
+	cd .. && make
+	cp ../switcher .
+	cp ../web_agent .
+	cp ../board .
+}
+
+if [ x$board = "xsimulate" ]; then
+	board_simulate_init
+elif [ x$board = "xyunuo" ]; then
+	board_yunuo_init
+elif [ x$board = "xremote" ]; then
+	board_remote_init
+else
+	echo "Usage: install <simulate|yunuo|remote>"
+fi
+
+exit 0

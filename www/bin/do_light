@@ -1,0 +1,91 @@
+#!/bin/sh
+
+. $WWWBIN/light_function.sh
+
+LIGHT_MAX_ID=`light_max_id`
+
+light_help() #
+{
+	echo "light commands"
+	echo "--------------"
+	echo "light <set|get|list> [id] [state]"
+	echo "    id    : 0~$LIGHT_MAX_ID"
+	echo "    state : 0-on, 1-off"
+	echo
+}
+
+light_set() #id, state
+{
+	local id=$1
+	local state=$2
+
+	if [ $# -ne 2 ]; then
+		light_help
+		return
+	fi
+
+	if [ $id -lt 0 -o $id -gt `light_max_id` ]; then
+		light_help
+		return
+	fi
+	
+	if [ $state != "0" -a $state != "1" ]; then
+		light_help
+		return
+	fi
+
+	light_set_one $id $state
+	light_get
+}
+
+light_get() #
+{
+	local state="light:"
+
+	for id in `seq 0 $LIGHT_MAX_ID`
+	do
+		state=$state`light_get_one $id`
+	done
+	echo $state
+}
+
+light_list() #
+{
+	local state=""
+
+	for id in `seq 0 $LIGHT_MAX_ID`
+	do
+		state=`light_get_one $id`
+		if [ x$state = "x0" ]; then
+			state=on
+		elif [ x$state = "x1" ]; then
+			state=off
+		else
+			state=unknown
+		fi
+		echo "light $id status $state"
+	done
+}
+
+do_light() #
+{
+	local cmd=$1
+
+	case $cmd in
+		set|s)
+			shift
+			light_set "$@"
+			;;
+		get|g)
+			light_get
+			;;
+		list|l)
+			light_list
+			;;
+		help|h|*)
+			light_help
+			;;
+	esac
+}
+
+do_light "$@"

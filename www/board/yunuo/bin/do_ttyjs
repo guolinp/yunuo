@@ -1,0 +1,52 @@
+#!/bin/sh
+
+ttyjs_help() #
+{
+	echo "ttyjs commands"
+	echo "--------------"
+	echo "ttyjs <enable|disable|show>"
+	echo
+}
+
+ttyjs_enable() #
+{
+	kill -9 `pidof tty.js` 2>/dev/null
+	$TTYJS &
+}
+
+ttyjs_disable() #
+{
+	kill -9 `pidof tty.js` 2>/dev/null
+}
+
+ttyjs_show() #
+{
+	if [ `pidof tty.js` != "" ]; then
+		echo "ttyjs is enabled"
+	else
+		echo "ttyjs is disabled"
+	fi
+}
+
+do_ttyjs() #
+{
+	local cmd=$1
+
+	case $cmd in
+		enable|e)
+			shift
+			ttyjs_enable
+			;;
+		disable|d)
+			ttyjs_disable
+			;;
+		show|s)
+			ttyjs_show
+			;;
+		help|h|*)
+			ttyjs_help
+			;;
+	esac
+}
+
+do_ttyjs "$@"

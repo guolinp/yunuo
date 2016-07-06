@@ -1,0 +1,87 @@
+#!/bin/sh
+
+. $WWWBIN/music_function.sh
+
+music_help() #
+{
+	echo "music commands"
+	echo "--------------"
+	echo "music <play|stop|list|get> [id]"
+	echo
+}
+
+music_message() #str
+{
+	echo "music:$1"
+}
+
+music_play() #id
+{
+	local id=$1
+	if [ x$id = "x" ]; then
+		music_message "error=music id missing"
+		return
+	fi
+	music_play_one $id
+	music_get
+}
+
+music_stop() #id
+{
+	local id=$1
+	if [ x$id = "x" ]; then
+		music_message "error=music id missing"
+		return
+	fi
+	music_stop_one $id
+	music_get
+}
+
+music_get() #
+{
+	music_message "state=`music_current`"
+}
+
+music_list() #
+{
+	local list=""
+
+	for file in `ls $WWWMUSIC/`
+	do
+		if [ ! -f $WWWMUSIC/$file ]; then
+			continue
+		fi
+		file=${file%.*}
+		list="$list$file|"
+	done
+	list=${list%|*}
+
+	music_message "list=$list"
+}
+
+do_music() #
+{
+	local cmd=$1
+
+	case $cmd in
+		play|p)
+			shift
+			music_play "$@"
+			;;
+		stop|s)
+			shift
+			music_stop "$@"
+			;;
+		get|g)
+			music_get
+			;;
+		list|l)
+			music_list
+			;;
+		help|h|*)
+			music_help
+			;;
+	esac
+}
+
+do_music "$@"
