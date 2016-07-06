@@ -1,7 +1,7 @@
 #!/bin/sh
 
-GPIO_GET=/home/ihome/yunuo/bin/gpio_get
-GPIO_SET=/home/ihome/yunuo/bin/gpio_set
+GPIO_GET=/usr/local/sbin/gpio_get
+GPIO_SET=/usr/local/sbin/gpio_set
 
 LIGHT_MAXID=7
 
