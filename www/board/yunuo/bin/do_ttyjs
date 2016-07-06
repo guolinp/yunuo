@@ -1,5 +1,7 @@
 #!/bin/sh
 
+TTYJS=/home/ihome/project/ttyjs/node_modules/tty.js/bin/tty.js
+
 ttyjs_help() #
 {
 	echo "ttyjs commands"
