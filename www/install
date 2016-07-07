@@ -5,7 +5,7 @@ board=$1
 common_init() #
 {
 	mkdir -p var
-	touch var/.music_current
+	echo x > var/.music_current
 	chmod 666 var/.music_current
 	touch var/.request.log
 	chmod 666 var/.request.log
@@ -15,10 +15,13 @@ board_simulate_init() #
 {
 	common_init
 	mkdir -p light
-	touch light/{0,1,2,3,4,5,6,7}
+	for f in `seq 0 7`
+	do
+		echo 0 > light/$f
+	done
 	chmod 666 light/*
 	mkdir -p music
-	touch music/{123.mp3,456.mp3,789.mp3,abc.mp3,def.mp3}
+	touch music/{song0.mp3,song1.mp3,song2.mp3,song3.mp3,song4.mp3}
 }
 
 board_yunuo_init() #
