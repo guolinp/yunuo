@@ -35,7 +35,7 @@ function shell_draw_ui()
 {
 	var line = '';
 
-	line += '<p> yunuo board shell </p>';
+	line += '<p> Command Line Interface </p>';
 	line += '<input type="button" value=" clear output " onclick="clear_output();">';
 	line += '<input type="checkbox" id="' + o_auto_clear + '"/>auto clear last output';
 	line += '<br>';
