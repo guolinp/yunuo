@@ -1,6 +1,7 @@
 #!/bin/sh
 
 CURRENT=$WWWVAR/.music_current
+IPLAYER=/usr/local/sbin/iplayer
 
 music_find() #id
 {
@@ -30,7 +31,7 @@ music_play_one() #id,
 
 	sudo killall mplayer 2>/dev/null
 	echo $id > $CURRENT
-	sudo -S iplayer $WWWMUSIC/`music_find $id` 2>/dev/null
+	sudo -S $IPLAYER $WWWMUSIC/`music_find $id` 2>/dev/null
 }
 
 music_stop_one() #id
