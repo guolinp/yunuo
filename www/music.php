@@ -11,7 +11,7 @@
   <script src="js/music.js"></script>
  </head>
  <body>
-	<span id="MusicContainer"></span>
+    <span id="MusicContainer"></span>
     <script type="text/javascript">
         music_init();
     </script>

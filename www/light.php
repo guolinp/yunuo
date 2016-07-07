@@ -11,7 +11,7 @@
   <script src="js/light.js"></script>
  </head>
  <body>
-	<span id="LightContainer"></span>
+    <span id="LightContainer"></span>
     <script type="text/javascript">
         light_init();
     </script>
