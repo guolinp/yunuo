@@ -3,11 +3,11 @@
 GPIO_GET=/usr/local/sbin/gpio_get
 GPIO_SET=/usr/local/sbin/gpio_set
 
-LIGHT_MAXID=7
+YUNUO_LIGHT_NUM=8
 
 light_max_id() #
 {
-	echo $LIGHT_MAXID
+	echo $YUNUO_LIGHT_NUM
 }
 
 light_set_one() #id, state

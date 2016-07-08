@@ -1,4 +1,6 @@
 <?php
+require_once('check_session.php');
+
 $user_command = $_GET['command']; 
 
 require_once('log.php');

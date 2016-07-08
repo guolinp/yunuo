@@ -2,16 +2,21 @@
 
 . $WWWBIN/light_function.sh
 
-LIGHT_MAX_ID=`light_max_id`
+LIGHT_NUM=`light_num`
 
 light_help() #
 {
 	echo "light commands"
 	echo "--------------"
-	echo "light <set|get|list> [id] [state]"
-	echo "    id    : 0~$LIGHT_MAX_ID"
+	echo "light <set|state|list|config> [id] [state]"
+	echo "    id    : 0~$LIGHT_NUM"
 	echo "    state : 0-on, 1-off"
 	echo
+}
+
+light_message() #str
+{
+	echo "light:$1"
 }
 
 light_set() #id, state
@@ -35,25 +40,25 @@ light_set() #id, state
 	fi
 
 	light_set_one $id $state
-	light_get
+	light_state
 }
 
-light_get() #
+light_state() #
 {
-	local state="light:"
+	local state=""
 
-	for id in `seq 0 $LIGHT_MAX_ID`
+	for id in `seq 0 $LIGHT_NUM`
 	do
 		state=$state`light_get_one $id`
 	done
-	echo $state
+	light_message "state=$state"
 }
 
 light_list() #
 {
 	local state=""
 
-	for id in `seq 0 $LIGHT_MAX_ID`
+	for id in `seq 0 $LIGHT_NUM`
 	do
 		state=`light_get_one $id`
 		if [ x$state = "x0" ]; then
@@ -67,6 +72,11 @@ light_list() #
 	done
 }
 
+light_config() #
+{
+	light_message "config=$LIGHT_NUM"
+}
+
 do_light() #
 {
 	local cmd=$1
@@ -76,11 +86,14 @@ do_light() #
 			shift
 			light_set "$@"
 			;;
-		get|g)
-			light_get
+		state|s)
+			light_state
 			;;
 		list|l)
 			light_list
+			;;
+		config|c)
+			light_config
 			;;
 		help|h|*)
 			light_help

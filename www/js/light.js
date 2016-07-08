@@ -45,11 +45,27 @@ function light_update_ui(state)
 	}
 }
 
+function light_init_with_config(config)
+{
+	var num = config;
+	light_draw_ui(num);
+	light_send_command("light state");
+}
+
 function light_callback(result)
 {
-	if (result.startsWith("light:")) {
-		light_update_ui(result.split(':')[1]);
-	}
+	if (!result.startsWith("light:"))
+		return;
+
+	var msg = result.split(':')[1].split('=');
+	if (msg[0] == "error")
+		alert("Error: " + msg[1]);
+	else if (msg[0] == "config")
+		light_init_with_config(msg[1]);
+	else if (msg[0] == "state")
+		light_update_ui(msg[1]);
+	else
+		alert("Error: bad command, " + result);
 }
 
 function light_send_command(cmdline)
@@ -79,6 +95,5 @@ function light_turn_off(devid)
 
 function light_init()
 {
-	light_draw_ui(8);
-	light_send_command("light get");
+	light_send_command("light config");
 }

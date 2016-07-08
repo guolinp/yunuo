@@ -1,10 +1,10 @@
 #!/bin/sh
 
-LIGHT_MAXID=7
+SIM_LIGHT_NUM=6
 
-light_max_id() #
+light_num() #
 {
-	echo $LIGHT_MAXID
+	echo $SIM_LIGHT_NUM
 }
 
 light_set_one() #id, state
