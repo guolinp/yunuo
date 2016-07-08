@@ -29,7 +29,7 @@ light_set() #id, state
 		return
 	fi
 
-	if [ $id -lt 0 -o $id -gt `light_max_id` ]; then
+	if [ $id -lt 0 -o $id -gt $LIGHT_NUM ]; then
 		light_help
 		return
 	fi
