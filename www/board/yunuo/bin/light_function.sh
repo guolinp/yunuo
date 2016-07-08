@@ -5,7 +5,7 @@ GPIO_SET=/usr/local/sbin/gpio_set
 
 YUNUO_LIGHT_NUM=8
 
-light_max_id() #
+light_num() #
 {
 	echo $YUNUO_LIGHT_NUM
 }
